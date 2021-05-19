@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import Home from "./src/views/Home";
+import Login from "./src/views/Login";
 
 export default function App() {
     const Stack = createStackNavigator();
@@ -14,6 +15,11 @@ export default function App() {
                     name="Home"
                     component={Home}
                     options={{ title: "Tela inicial", headerShown: false }}
+                />
+                <Stack.Screen
+                    name="Login"
+                    component={Login}
+                    options={{ title: "Tela Login", headerShown: false }}
                 />
             </Stack.Navigator>
         </NavigationContainer>
