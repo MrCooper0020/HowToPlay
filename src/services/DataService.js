@@ -47,3 +47,14 @@ export function updateData(collection, data, id) {
             .catch((error) => reject(error))
     );
 }
+
+export function saveData(collection, data) {
+    if (data.id) {
+        let id = data.id;
+        delete data.id;
+
+        return updateData(collection, data, id);
+    } else {
+        return addData(collection, data);
+    }
+}

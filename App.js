@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import Home from "./src/views/Home";
 import Login from "./src/views/Login";
+import RegisterGame from "./src/views/RegisterGame";
 
 export default function App() {
     const Stack = createStackNavigator();
@@ -14,12 +15,23 @@ export default function App() {
                 <Stack.Screen
                     name="Home"
                     component={Home}
-                    options={{ title: "Tela inicial", headerShown: false }}
+                    options={({ route, navigation }) => ({
+                        title: "How to play",
+                        headerShown: true,
+                    })}
                 />
                 <Stack.Screen
                     name="Login"
                     component={Login}
-                    options={{ title: "Tela Login", headerShown: false }}
+                    options={{ title: "Login", headerShown: false }}
+                />
+                <Stack.Screen
+                    name="RegisterGame"
+                    component={RegisterGame}
+                    options={{
+                        title: "Adicionar jogo",
+                        headerShown: true,
+                    }}
                 />
             </Stack.Navigator>
         </NavigationContainer>

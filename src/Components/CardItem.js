@@ -1,16 +1,20 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
 export default function CardItem(props) {
     return (
-        <View style={styles.cardBody}>
-            {props.image ? (
-                <Image source={props.image} style={styles.cardImage}></Image>
-            ) : (
-                <Text style={styles.cardTitle}>{props.title}</Text>
-            )}
-        </View>
+        <TouchableOpacity onPress={props.onPress}>
+            <View style={styles.cardBody}>
+                {props.image ? (
+                    <Image
+                        source={props.image}
+                        style={styles.cardImage}
+                    ></Image>
+                ) : (
+                    <Text style={styles.cardTitle}>{props.title}</Text>
+                )}
+            </View>
+        </TouchableOpacity>
     );
 }
 
