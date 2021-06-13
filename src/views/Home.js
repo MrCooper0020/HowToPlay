@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useEffect, useState } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import {
     StyleSheet,
     Text,
@@ -12,45 +12,17 @@ import { Button } from "react-native-elements/dist/buttons/Button";
 
 import * as DataService from "../services/DataService";
 import CardItem from "../Components/CardItem";
+import * as GamesAction from "../services/actions/gamesAction";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function Home({ route, navigation }) {
-    const [games, setGames] = useState([]);
+    const dispatch = useDispatch();
+    const games = useSelector((store) => store.games);
     const [loading, setLoading] = useState(false);
-    const [login, setLogin] = useState({ name: "Matheus" });
 
-    useEffect(() => {
-        const unsubscribe = navigation.addListener("focus", () => {
-            refresh();
-
-            // attention needed
-            navigation.setOptions({
-                headerRight: () => (
-                    <Button
-                        onPress={() =>
-                            login
-                                ? setLogin(false)
-                                : navigation.navigate("Login")
-                        }
-                        title={login ? "Sair" : "Entrar"}
-                        type="clear"
-                    />
-                ),
-            });
-        });
-        return unsubscribe;
-    }, [navigation]);
-
-    function refresh() {
-        setLoading(true);
-        DataService.getData("games").then((data) => {
-            setGames(data);
-            setLoading(false);
-        });
-    }
-
-    const image = {
-        uri: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.toucharcade.com%2Fwp-content%2Fuploads%2F2013%2F12%2FGTA_SA1.jpg&f=1&nofb=1",
-    };
+    useLayoutEffect(() => {
+        dispatch(GamesAction.getAll());
+    }, [dispatch]);
 
     return (
         <View style={styles.container}>
@@ -73,7 +45,17 @@ export default function Home({ route, navigation }) {
                                 }}
                             />
                             {games.map((item, i) => {
-                                return <CardItem key={i} title={item.name} />;
+                                return (
+                                    <CardItem
+                                        key={i}
+                                        title={item.name}
+                                        onPress={() =>
+                                            navigation.navigate("GamePage", {
+                                                game: item,
+                                            })
+                                        }
+                                    />
+                                );
                             })}
                         </View>
                     </ScrollView>

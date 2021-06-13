@@ -6,18 +6,14 @@ const colletion = "Games";
 export const getAll = () => async (dispatch, getState) => {
     try {
         let data = [];
-        let tempList = [];
 
         await DataService.getData(colletion).then((res) => {
             data = res;
         });
 
-        data.forEach((item) =>
-            tempList.push(Object.assign({}, item.data(), { id: item.id }))
-        );
         return dispatch({
             type: SET_GAMES_DATA,
-            payload: tempList,
+            payload: data,
         });
     } catch (error) {
         throw error.message;

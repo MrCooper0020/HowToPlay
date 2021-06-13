@@ -3,26 +3,35 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, TextInput } from "react-native";
 import { Button } from "react-native-elements/dist/buttons/Button";
 
-import * as DataService from "../services/DataService";
+import * as GameAction from "../services/actions/gameAction";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function RegisterGame({ route, navigation }) {
+    const dispatch = useDispatch();
     const [name, setName] = useState("");
     const [releaseDate, setReleaseDate] = useState("");
     const [description, setDescription] = useState("");
     const [developer, setDeveloper] = useState("");
     const [loading, setLoading] = useState(false);
 
-    function uploadData() {
+    async function uploadData() {
         setLoading(true);
 
-        DataService.addData("Games", {
-            name,
-            releaseDate,
-            description,
-            developer,
-        }).then(() => {
+        try {
+            await dispatch(
+                GameAction.save({
+                    name,
+                    releaseDate,
+                    description,
+                    developer,
+                    comments: [],
+                })
+            );
+
             navigation.navigate("Home");
-        });
+        } catch (error) {
+            setLoading(false);
+        }
     }
 
     return (
