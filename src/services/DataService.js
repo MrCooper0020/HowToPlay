@@ -45,12 +45,7 @@ export function addData(collection, data) {
 }
 
 export function deleteData(collection, id) {
-    return new Promise((resolve, reject) => {
-        db.collection(collection.toUpperCase())
-            .doc(id)
-            .then(() => resolve())
-            .catch((error) => reject(error));
-    });
+    db.collection(collection.toUpperCase()).doc(id).delete();
 }
 
 export function updateData(collection, data, id) {

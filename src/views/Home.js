@@ -12,6 +12,7 @@ import { Button } from "react-native-elements/dist/buttons/Button";
 
 import CardItem from "../Components/CardItem";
 import * as UsersAction from "../services/actions/usersAction";
+import * as LoginAction from "../services/actions/loginAction";
 import * as GamesAction from "../services/actions/gamesAction";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -19,7 +20,6 @@ export default function Home({ route, navigation }) {
     const dispatch = useDispatch();
     const login = useSelector((store) => store.login);
     const games = useSelector((store) => store.games);
-    const [loading, setLoading] = useState(false);
 
     useLayoutEffect(() => {
         dispatch(GamesAction.getAll());
@@ -28,7 +28,13 @@ export default function Home({ route, navigation }) {
         navigation.setOptions({
             headerRight: () => {
                 if (login.email) {
-                    return <Button title="Sair" type="clear" />;
+                    return (
+                        <Button
+                            title="Sair"
+                            type="clear"
+                            onPress={() => logout()}
+                        />
+                    );
                 } else {
                     return (
                         <Button
@@ -42,11 +48,16 @@ export default function Home({ route, navigation }) {
         });
     }, [dispatch, navigation]);
 
+    async function logout() {
+        await dispatch(LoginAction.signOut());
+        navigation.navigate("home");
+    }
+
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
-            {loading ? (
-                <Text>Carregando...</Text>
+            {games.length == 0 ? (
+                <Text>Nenhum jogo cadastrado!</Text>
             ) : (
                 <SafeAreaView
                     style={{

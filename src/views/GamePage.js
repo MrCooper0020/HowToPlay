@@ -50,7 +50,6 @@ export default function GamePage({ route, navigation }) {
 
     async function deleteGame() {
         setLoadingDelete(true);
-        console.log(game);
 
         try {
             await dispatch(GameAction.remove(game.id));
@@ -66,6 +65,7 @@ export default function GamePage({ route, navigation }) {
             navigation.navigate("Home");
         } catch (error) {
             setLoadingDelete(false);
+            console.log(error);
         }
     }
 
