@@ -6,13 +6,12 @@ import { Button } from "react-native-elements/dist/buttons/Button";
 import * as GameAction from "../services/actions/gameAction";
 import { useSelector, useDispatch } from "react-redux";
 
-export default function RegisterGame({ route, navigation }) {
+export default function NewAccount({ route, navigation }) {
     const dispatch = useDispatch();
-    const [name, setName] = useState("");
-    const [releaseDate, setReleaseDate] = useState("");
-    const [description, setDescription] = useState("");
-    const [developer, setDeveloper] = useState("");
     const [loading, setLoading] = useState(false);
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     async function uploadData() {
         setLoading(true);
@@ -53,7 +52,7 @@ export default function RegisterGame({ route, navigation }) {
                     value={name}
                     onChangeText={(text) => setName(text)}
                 />
-                <Text>Data de lancamento:</Text>
+                <Text>Email:</Text>
                 <TextInput
                     style={{
                         width: "100%",
@@ -64,12 +63,11 @@ export default function RegisterGame({ route, navigation }) {
                         marginTop: 10,
                         marginBottom: 10,
                     }}
-                    placeholder="Data de lancamento"
-                    keyboardType="numeric"
-                    value={releaseDate}
-                    onChangeText={(text) => setReleaseDate(text)}
+                    placeholder="Email"
+                    value={email}
+                    onChangeText={(text) => setEmail(text)}
                 />
-                <Text>Descricao (opicional):</Text>
+                <Text>Senha:</Text>
                 <TextInput
                     style={{
                         width: "100%",
@@ -80,27 +78,12 @@ export default function RegisterGame({ route, navigation }) {
                         marginTop: 10,
                         marginBottom: 10,
                     }}
-                    placeholder="Descricao"
-                    value={description}
-                    onChangeText={(text) => setDescription(text)}
-                />
-                <Text>Desenvolvedor:</Text>
-                <TextInput
-                    style={{
-                        width: "100%",
-                        padding: 10,
-                        borderColor: "Gray",
-                        borderWidth: 1,
-                        borderRadius: 10,
-                        marginTop: 10,
-                        marginBottom: 10,
-                    }}
-                    placeholder="Desenvolvedor"
-                    value={developer}
-                    onChangeText={(text) => setDeveloper(text)}
+                    placeholder="Senha"
+                    value={password}
+                    onChangeText={(text) => setPassword(text)}
                 />
                 <Button
-                    title="Adicionar"
+                    title="Criar"
                     buttonStyle={{
                         backgroundColor: "green",
                         borderRadius: 10,

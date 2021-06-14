@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Input, Button } from "react-native-elements";
 
-import * as GameAction from "../services/actions/gameAction";
+import * as CommentAction from "../services/actions/commentAction";
 import { useSelector, useDispatch } from "react-redux";
 
 export default function NewComment({ route, navigation }) {
@@ -14,20 +14,13 @@ export default function NewComment({ route, navigation }) {
 
     async function sendComment() {
         setLoading(true);
-        let allComments = game.comments ? game.comments : [];
-        allComments.push(comment);
-
-        console.log(allComments);
 
         try {
             await dispatch(
-                GameAction.save({
-                    id: game.id,
-                    name: game.name,
-                    releaseDate: game.releaseDate,
-                    description: game.description,
-                    developer: game.developer,
-                    comments: allComments,
+                CommentAction.save({
+                    userId: 0,
+                    gameId: game.id,
+                    comment: comment,
                 })
             );
 

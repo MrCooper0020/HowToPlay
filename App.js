@@ -13,6 +13,8 @@ import RegisterGame from "./src/views/RegisterGame";
 import About from "./src/views/About";
 import GamePage from "./src/views/GamePage";
 import NewComment from "./src/views/NewComment";
+import TipsRoom from "./src/views/TipsRoom";
+import NewAccount from "./src/views/NewAccount";
 
 export default function App() {
     const Stack = createStackNavigator();
@@ -62,13 +64,40 @@ export default function App() {
                     <Stack.Screen
                         name="GamePage"
                         component={GamePage}
-                        options={{ title: "Pagina do jogo", headerShown: true }}
+                        options={({ route, navigation }) => ({
+                            title: "Pagina do jogo",
+                            headerShown: true,
+                            headerRight: () => (
+                                <Button
+                                    onPress={() =>
+                                        navigation.navigate("RegisterGame")
+                                    }
+                                    title="editar"
+                                />
+                            ),
+                        })}
                     />
                     <Stack.Screen
                         name="NewComment"
                         component={NewComment}
                         options={{
                             title: "Novo comentario",
+                            headerShown: true,
+                        }}
+                    />
+                    <Stack.Screen
+                        name="TipsRoom"
+                        component={TipsRoom}
+                        options={{
+                            title: "Sala de dicas",
+                            headerShown: true,
+                        }}
+                    />
+                    <Stack.Screen
+                        name="NewAccount"
+                        component={NewAccount}
+                        options={{
+                            title: "Criar conta",
                             headerShown: true,
                         }}
                     />

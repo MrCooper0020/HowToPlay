@@ -5,7 +5,7 @@ import * as LoginAction from "../services/actions/loginAction";
 import { useSelector, useDispatch } from "react-redux";
 import { Input, Button } from "react-native-elements";
 
-export default function Login() {
+export default function Login({ route, navigation }) {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
@@ -13,6 +13,11 @@ export default function Login() {
                 <Input placeholder="Email" />
                 <Input placeholder="Senha" />
                 <Button title="Entrar" />
+                <Button
+                    title="Criar conta"
+                    type="clear"
+                    onPress={() => navigation.navigate("NewAccount")}
+                />
             </View>
         </View>
     );
@@ -25,6 +30,6 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     loginBody: {
-        width: "60%",
+        width: "70%",
     },
 });

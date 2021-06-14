@@ -1,11 +1,24 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useLayoutEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Card, ListItem, Button, Icon } from "react-native-elements";
+import * as CommentsAction from "../services/actions/commentsAction";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function GamePage({ route, navigation }) {
+    const dispatch = useDispatch();
+    const allComments = useSelector((store) => store.comments);
     const { game } = route.params;
-    const allComments = game.comments ? game.comments : [];
+    const [comments, setComments] = useState([]);
+
+    useLayoutEffect(() => {
+        async function loadData() {
+            try {
+                await dispatch(CommentsAction.getAll());
+            } catch (error) {}
+        }
+        loadData();
+    }, [dispatch]);
 
     return (
         <View>
@@ -19,7 +32,10 @@ export default function GamePage({ route, navigation }) {
                 <Text>Data de lancamento: {game.releaseDate}</Text>
             </View>
             <View>
-                <Button title="Sala de dicas" />
+                <Button
+                    title="Sala de dicas"
+                    onPress={() => navigation.navigate("TipsRoom", { game })}
+                />
             </View>
             <View>
                 <Text>Comentarios sobre o jogo:</Text>
@@ -28,13 +44,15 @@ export default function GamePage({ route, navigation }) {
                     onPress={() => navigation.navigate("NewComment", { game })}
                 />
                 {allComments.map((comment, index) => {
-                    return (
-                        <Card key={index}>
-                            <Card.Title>Joao</Card.Title>
-                            <Card.Divider />
-                            <Text>{comment}</Text>
-                        </Card>
-                    );
+                    if (game.id == comment.gameId) {
+                        return (
+                            <Card key={index}>
+                                <Card.Title>Joao</Card.Title>
+                                <Card.Divider />
+                                <Text>{comment.comment}</Text>
+                            </Card>
+                        );
+                    }
                 })}
             </View>
         </View>
