@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, TextInput } from "react-native";
 import { Button } from "react-native-elements/dist/buttons/Button";
 
-import * as GameAction from "../services/actions/gameAction";
+import * as LoginAction from "../services/actions/loginAction";
+import * as UserAction from "../services/actions/userAction";
 import { useSelector, useDispatch } from "react-redux";
 
 export default function NewAccount({ route, navigation }) {
@@ -13,17 +14,15 @@ export default function NewAccount({ route, navigation }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    async function uploadData() {
+    async function CreateUser() {
         setLoading(true);
 
         try {
+            await dispatch(LoginAction.createAccount(email, password));
             await dispatch(
-                GameAction.save({
+                UserAction.save({
                     name,
-                    releaseDate,
-                    description,
-                    developer,
-                    creatorId: 0,
+                    email,
                 })
             );
 
@@ -42,7 +41,7 @@ export default function NewAccount({ route, navigation }) {
                     style={{
                         width: "100%",
                         padding: 10,
-                        borderColor: "Gray",
+                        borderColor: "gray",
                         borderWidth: 1,
                         borderRadius: 10,
                         marginTop: 10,
@@ -57,7 +56,7 @@ export default function NewAccount({ route, navigation }) {
                     style={{
                         width: "100%",
                         padding: 10,
-                        borderColor: "Gray",
+                        borderColor: "gray",
                         borderWidth: 1,
                         borderRadius: 10,
                         marginTop: 10,
@@ -72,7 +71,7 @@ export default function NewAccount({ route, navigation }) {
                     style={{
                         width: "100%",
                         padding: 10,
-                        borderColor: "Gray",
+                        borderColor: "gray",
                         borderWidth: 1,
                         borderRadius: 10,
                         marginTop: 10,
@@ -90,7 +89,7 @@ export default function NewAccount({ route, navigation }) {
                         padding: 15,
                     }}
                     loading={loading}
-                    onPress={() => uploadData()}
+                    onPress={() => CreateUser()}
                 />
             </View>
         </View>

@@ -10,19 +10,37 @@ import {
 } from "react-native";
 import { Button } from "react-native-elements/dist/buttons/Button";
 
-import * as DataService from "../services/DataService";
 import CardItem from "../Components/CardItem";
+import * as UsersAction from "../services/actions/usersAction";
 import * as GamesAction from "../services/actions/gamesAction";
 import { useSelector, useDispatch } from "react-redux";
 
 export default function Home({ route, navigation }) {
     const dispatch = useDispatch();
+    const login = useSelector((store) => store.login);
     const games = useSelector((store) => store.games);
     const [loading, setLoading] = useState(false);
 
     useLayoutEffect(() => {
         dispatch(GamesAction.getAll());
-    }, [dispatch]);
+        dispatch(UsersAction.getAll());
+
+        navigation.setOptions({
+            headerRight: () => {
+                if (login.email) {
+                    return <Button title="Sair" type="clear" />;
+                } else {
+                    return (
+                        <Button
+                            onPress={() => navigation.navigate("Login")}
+                            title="Entrar"
+                            type="clear"
+                        />
+                    );
+                }
+            },
+        });
+    }, [dispatch, navigation]);
 
     return (
         <View style={styles.container}>
@@ -38,12 +56,15 @@ export default function Home({ route, navigation }) {
                 >
                     <ScrollView style={{ paddingLeft: 20, paddingRight: 20 }}>
                         <View>
-                            <CardItem
-                                title="Adicionar jogo"
-                                onPress={() => {
-                                    navigation.navigate("RegisterGame");
-                                }}
-                            />
+                            {login.email ? (
+                                <CardItem
+                                    title="Adicionar jogo"
+                                    onPress={() => {
+                                        navigation.navigate("RegisterGame");
+                                    }}
+                                />
+                            ) : null}
+
                             {games.map((item, i) => {
                                 return (
                                     <CardItem

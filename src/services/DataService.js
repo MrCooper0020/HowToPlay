@@ -13,7 +13,6 @@ export function getData(collection) {
                         })
                     )
                 );
-                console.log(list);
                 resolve(list);
             })
             .catch((error) => reject(error));

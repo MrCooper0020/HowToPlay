@@ -29,16 +29,12 @@ export default function App() {
                         options={({ route, navigation }) => ({
                             title: "How to play",
                             headerShown: true,
-                            headerRight: () => (
-                                <Button
-                                    onPress={() => navigation.navigate("Login")}
-                                    title="Login"
-                                />
-                            ),
                             headerLeft: () => (
                                 <Button
                                     onPress={() => navigation.navigate("About")}
                                     title="Sobre"
+                                    type="clear"
+                                    buttonStyle={{ fontColor: "blue" }}
                                 />
                             ),
                         })}
@@ -67,14 +63,6 @@ export default function App() {
                         options={({ route, navigation }) => ({
                             title: "Pagina do jogo",
                             headerShown: true,
-                            headerRight: () => (
-                                <Button
-                                    onPress={() =>
-                                        navigation.navigate("RegisterGame")
-                                    }
-                                    title="editar"
-                                />
-                            ),
                         })}
                     />
                     <Stack.Screen
