@@ -50,33 +50,32 @@ export default function Home({ route, navigation }) {
 
     async function logout() {
         await dispatch(LoginAction.signOut());
-        navigation.navigate("home");
+        navigation.replace("Login");
     }
 
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
-            {games.length == 0 ? (
-                <Text>Nenhum jogo cadastrado!</Text>
-            ) : (
-                <SafeAreaView
-                    style={{
-                        width: "100%",
-                        height: "100%",
-                    }}
-                >
-                    <ScrollView style={{ paddingLeft: 20, paddingRight: 20 }}>
-                        <View>
-                            {login.email ? (
-                                <CardItem
-                                    title="Adicionar jogo"
-                                    onPress={() => {
-                                        navigation.navigate("RegisterGame");
-                                    }}
-                                />
-                            ) : null}
-
-                            {games.map((item, i) => {
+            <SafeAreaView
+                style={{
+                    width: "100%",
+                    height: "100%",
+                }}
+            >
+                <ScrollView style={{ paddingLeft: 20, paddingRight: 20 }}>
+                    <View>
+                        {login.email ? (
+                            <CardItem
+                                title="Adicionar jogo"
+                                onPress={() => {
+                                    navigation.navigate("RegisterGame");
+                                }}
+                            />
+                        ) : null}
+                        {games.length == 0 ? (
+                            <Text>Nenhum jogo cadastrado!</Text>
+                        ) : (
+                            games.map((item, i) => {
                                 return (
                                     <CardItem
                                         key={i}
@@ -88,11 +87,11 @@ export default function Home({ route, navigation }) {
                                         }
                                     />
                                 );
-                            })}
-                        </View>
-                    </ScrollView>
-                </SafeAreaView>
-            )}
+                            })
+                        )}
+                    </View>
+                </ScrollView>
+            </SafeAreaView>
         </View>
     );
 }
