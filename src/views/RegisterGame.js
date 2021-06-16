@@ -61,10 +61,8 @@ export default function RegisterGame({ route, navigation }) {
 
         try {
             await dispatch(GameAction.save(currentGame));
-
             navigation.navigate("Home");
         } catch (error) {
-            console.log(error);
             setLoading(false);
         }
     }

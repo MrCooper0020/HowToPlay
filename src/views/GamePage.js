@@ -33,20 +33,7 @@ export default function GamePage({ route, navigation }) {
                 }
             });
         }
-
-        navigation.setOptions({
-            headerRight: () => (
-                <Button
-                    onPress={() =>
-                        navigation.navigate("RegisterGame", { game })
-                    }
-                    type="clear"
-                    disabled={!isCreator}
-                    title="editar"
-                />
-            ),
-        });
-    }, [dispatch, navigation]);
+    }, [dispatch]);
 
     async function deleteGame() {
         setLoadingDelete(true);
@@ -82,12 +69,21 @@ export default function GamePage({ route, navigation }) {
             </View>
             <View>
                 {isCreator ? (
-                    <Button
-                        title="Deletar jogo"
-                        buttonStyle={{ backgroundColor: "red" }}
-                        loading={loadingDelete}
-                        onPress={() => deleteGame()}
-                    />
+                    <>
+                        <Button
+                            title="Editar jogo"
+                            loading={loadingDelete}
+                            onPress={() =>
+                                navigation.navigate("RegisterGame", { game })
+                            }
+                        />
+                        <Button
+                            title="Deletar jogo"
+                            buttonStyle={{ backgroundColor: "red" }}
+                            loading={loadingDelete}
+                            onPress={() => deleteGame()}
+                        />
+                    </>
                 ) : null}
                 <Button
                     title="Sala de dicas"

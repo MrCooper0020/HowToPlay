@@ -51,7 +51,7 @@ export function deleteData(collection, id) {
 export function updateData(collection, data, id) {
     return new Promise((resolve, reject) =>
         db
-            .collection(collection)
+            .collection(collection.toUpperCase())
             .doc(id)
             .update(data)
             .then(() => resolve())

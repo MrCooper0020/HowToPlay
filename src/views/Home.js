@@ -73,7 +73,9 @@ export default function Home({ route, navigation }) {
                             />
                         ) : null}
                         {games.length == 0 ? (
-                            <Text>Nenhum jogo cadastrado!</Text>
+                            <View style={styles.messageContainer}>
+                                <Text>Nenhum jogo cadastrado!</Text>
+                            </View>
                         ) : (
                             games.map((item, i) => {
                                 return (
@@ -101,5 +103,10 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
+    },
+    messageContainer: {
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100%",
     },
 });
