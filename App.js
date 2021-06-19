@@ -17,6 +17,9 @@ import TipsRoom from "./src/views/TipsRoom";
 import NewAccount from "./src/views/NewAccount";
 import NewTip from "./src/views/NewTip";
 import Maps from "./src/views/Maps";
+import HowWasMade from "./src/views/HowWasMade";
+import Architecture from "./src/views/Architecture";
+import Faq from "./src/views/Faq";
 
 export default function App() {
     const Stack = createStackNavigator();
@@ -92,10 +95,42 @@ export default function App() {
                         }}
                     />
                     <Stack.Screen
+                        name="NewTip"
+                        component={NewTip}
+                        options={{
+                            title: "Nova Dica",
+                            headerShown: true,
+                        }}
+                    />
+                    <Stack.Screen
                         name="Maps"
                         component={Maps}
                         options={{
                             title: "Minha localizacão",
+                            headerShown: true,
+                        }}
+                    />
+                    <Stack.Screen
+                        name="HowWasMade"
+                        component={HowWasMade}
+                        options={{
+                            title: "Expo ou CLI?",
+                            headerShown: true,
+                        }}
+                    />
+                    <Stack.Screen
+                        name="Architecture"
+                        component={Architecture}
+                        options={{
+                            title: "Arquitetura",
+                            headerShown: true,
+                        }}
+                    />
+                    <Stack.Screen
+                        name="Faq"
+                        component={Faq}
+                        options={{
+                            title: "FAQ",
                             headerShown: true,
                         }}
                     />

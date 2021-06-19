@@ -70,6 +70,24 @@ export default function Home({ route, navigation }) {
                                 navigation.navigate("Maps");
                             }}
                         />
+                        <CardItem
+                            title="Expo ou CLI?"
+                            onPress={() => {
+                                navigation.navigate("HowWasMade");
+                            }}
+                        />
+                        <CardItem
+                            title="Arquitetura"
+                            onPress={() => {
+                                navigation.navigate("Architecture");
+                            }}
+                        />
+                        <CardItem
+                            title="FAQ"
+                            onPress={() => {
+                                navigation.navigate("Faq");
+                            }}
+                        />
                         {login.email ? (
                             <CardItem
                                 title="Adicionar jogo"
