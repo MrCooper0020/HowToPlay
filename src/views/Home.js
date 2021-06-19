@@ -64,6 +64,12 @@ export default function Home({ route, navigation }) {
             >
                 <ScrollView style={{ paddingLeft: 20, paddingRight: 20 }}>
                     <View>
+                        <CardItem
+                            title="Minha Localizacão"
+                            onPress={() => {
+                                navigation.navigate("Maps");
+                            }}
+                        />
                         {login.email ? (
                             <CardItem
                                 title="Adicionar jogo"

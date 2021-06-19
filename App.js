@@ -16,6 +16,7 @@ import NewComment from "./src/views/NewComment";
 import TipsRoom from "./src/views/TipsRoom";
 import NewAccount from "./src/views/NewAccount";
 import NewTip from "./src/views/NewTip";
+import Maps from "./src/views/Maps";
 
 export default function App() {
     const Stack = createStackNavigator();
@@ -56,7 +57,7 @@ export default function App() {
                     <Stack.Screen
                         name="About"
                         component={About}
-                        options={{ title: "Expo ou CLI?", headerShown: true }}
+                        options={{ title: "Sobre", headerShown: true }}
                     />
                     <Stack.Screen
                         name="GamePage"
@@ -91,10 +92,10 @@ export default function App() {
                         }}
                     />
                     <Stack.Screen
-                        name="NewTip"
-                        component={NewTip}
+                        name="Maps"
+                        component={Maps}
                         options={{
-                            title: "Nova Dica",
+                            title: "Minha localizacão",
                             headerShown: true,
                         }}
                     />
