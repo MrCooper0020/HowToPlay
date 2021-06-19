@@ -6,6 +6,8 @@ import * as UsersAction from "../services/actions/usersAction";
 import * as GameAction from "../services/actions/gameAction";
 import * as CommentsAction from "../services/actions/commentsAction";
 import * as CommentAction from "../services/actions/commentAction";
+import * as TipsAction from "../services/actions/tipsAction";
+import * as TipAction from "../services/actions/tipAction";
 import { useSelector, useDispatch } from "react-redux";
 
 export default function GamePage({ route, navigation }) {
@@ -13,6 +15,7 @@ export default function GamePage({ route, navigation }) {
     const allComments = useSelector((store) => store.comments);
     const login = useSelector((store) => store.login);
     const users = useSelector((store) => store.users);
+    const tips = useSelector((store) => store.tips);
     const { game } = route.params;
     const [isCreator, setIsCreator] = useState(false);
     const [loadingDelete, setLoadingDelete] = useState(false);
@@ -22,6 +25,7 @@ export default function GamePage({ route, navigation }) {
             try {
                 await dispatch(CommentsAction.getAll());
                 await dispatch(UsersAction.getAll());
+                await dispatch(TipsAction.getAll());
             } catch (error) {}
         }
         loadData();
@@ -47,7 +51,11 @@ export default function GamePage({ route, navigation }) {
                 }
             });
 
-            // to do: remove tips about this game.
+            tips.forEach((tip) => {
+                if (game.id == tip.gameId) {
+                    dispatch(TipAction.remove(tip.id));
+                }
+            });
 
             navigation.navigate("Home");
         } catch (error) {
