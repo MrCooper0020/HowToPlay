@@ -35,34 +35,39 @@ export default function TipsRoom({ route, navigation }) {
                 onPress={() => navigation.navigate("NewTip", { game })}
             />
             {tips.map((tip, i) => {
-                let currentUser;
+                if (game.id == tip.gameId) {
+                    let currentUser;
 
-                users.forEach((user) => {
-                    if (user.id == tip.userId) {
-                        currentUser = user;
-                    }
-                });
+                    users.forEach((user) => {
+                        if (user.id == tip.userId) {
+                            currentUser = user;
+                        }
+                    });
 
-                return (
-                    <Card key={i}>
-                        <Card.Title>{currentUser.name}</Card.Title>
-                        <Card.Divider />
-                        <Text>{tip.tip}</Text>
-                        <Card.Divider />
-                        <View>
-                            <Button
-                                title="Editar"
-                                onPress={() =>
-                                    navigation.navigate("NewTip", { game, tip })
-                                }
-                            />
-                            <Button
-                                title="Apagar"
-                                onPress={() => deleteTip(tip.id)}
-                            />
-                        </View>
-                    </Card>
-                );
+                    return (
+                        <Card key={i}>
+                            <Card.Title>{currentUser.name}</Card.Title>
+                            <Card.Divider />
+                            <Text>{tip.tip}</Text>
+                            <Card.Divider />
+                            <View>
+                                <Button
+                                    title="Editar"
+                                    onPress={() =>
+                                        navigation.navigate("NewTip", {
+                                            game,
+                                            tip,
+                                        })
+                                    }
+                                />
+                                <Button
+                                    title="Apagar"
+                                    onPress={() => deleteTip(tip.id)}
+                                />
+                            </View>
+                        </Card>
+                    );
+                }
             })}
         </View>
     );
