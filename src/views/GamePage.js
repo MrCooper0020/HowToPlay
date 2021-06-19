@@ -1,7 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useLayoutEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { Card, ListItem, Button, Icon } from "react-native-elements";
+import {
+    StyleSheet,
+    View,
+    SafeAreaView,
+    ScrollView,
+    ImageBackground,
+} from "react-native";
+import { Card, ListItem, Button, Icon, Text } from "react-native-elements";
 import * as UsersAction from "../services/actions/usersAction";
 import * as GameAction from "../services/actions/gameAction";
 import * as CommentsAction from "../services/actions/commentsAction";
@@ -75,103 +81,217 @@ export default function GamePage({ route, navigation }) {
     return (
         <View>
             <StatusBar style="auto" />
-            <View style={styles.banner}>
-                <Text style={styles.nameBanner}>{game.name}</Text>
-            </View>
-            <View style={styles.body}>
-                <Text>Descricao do jogo: {game.description}</Text>
-                <Text>Desenvolvedora: {game.developer}</Text>
-                <Text>Data de lancamento: {game.releaseDate}</Text>
-            </View>
-            <View>
-                {isCreator ? (
-                    <>
+            <SafeAreaView
+                style={{
+                    width: "100%",
+                    height: "100%",
+                }}
+            >
+                <ScrollView>
+                    <View style={styles.banner}>
+                        <ImageBackground
+                            source={require("../Images/gameBanner.png")}
+                            blurRadius={Platform.OS == "ios" ? 10 : 5}
+                            style={styles.image}
+                        >
+                            <Text style={styles.nameBanner}>{game.name}</Text>
+                        </ImageBackground>
+                    </View>
+                    <View style={styles.body}>
+                        <Text style={styles.infoGame}>
+                            <Text h4>Descricao do jogo: </Text>
+                            <Text h5>{game.description}</Text>
+                        </Text>
+                        <Text style={styles.infoGame}>
+                            <Text h4>Desenvolvedora: </Text>
+                            <Text h5>{game.developer}</Text>
+                        </Text>
+                        <Text style={styles.infoGame}>
+                            <Text h4>Data de lancamento: </Text>
+                            <Text h5>{game.releaseDate}</Text>
+                        </Text>
+                    </View>
+                    <View style={styles.adminBody}>
+                        {isCreator ? (
+                            <>
+                                <Button
+                                    title="Editar jogo"
+                                    loading={loadingDelete}
+                                    buttonStyle={styles.yellowButton}
+                                    onPress={() =>
+                                        navigation.navigate("RegisterGame", {
+                                            game,
+                                        })
+                                    }
+                                />
+                                <Button
+                                    title="Deletar jogo"
+                                    buttonStyle={styles.redButton}
+                                    loading={loadingDelete}
+                                    onPress={() => deleteGame()}
+                                />
+                            </>
+                        ) : null}
                         <Button
-                            title="Editar jogo"
-                            loading={loadingDelete}
+                            title="Sala de dicas"
+                            buttonStyle={styles.normalButton}
+                            disabled={!login.email ? true : false}
                             onPress={() =>
-                                navigation.navigate("RegisterGame", { game })
+                                navigation.navigate("TipsRoom", { game })
                             }
                         />
+                    </View>
+                    <View style={styles.adminBody}>
+                        <Card.Divider />
+                        <Text h4 style={styles.subtitle}>
+                            Comentarios sobre o jogo:
+                        </Text>
                         <Button
-                            title="Deletar jogo"
-                            buttonStyle={{ backgroundColor: "red" }}
-                            loading={loadingDelete}
-                            onPress={() => deleteGame()}
-                        />
-                    </>
-                ) : null}
-                <Button
-                    title="Sala de dicas"
-                    disabled={!login.email ? true : false}
-                    onPress={() => navigation.navigate("TipsRoom", { game })}
-                />
-            </View>
-            <View>
-                <Text>Comentarios sobre o jogo:</Text>
-                <Button
-                    title="Comentar"
-                    disabled={!login.email > 0 ? true : false}
-                    onPress={() => navigation.navigate("NewComment", { game })}
-                />
-                {allComments.map((comment, index) => {
-                    if (game.id == comment.gameId) {
-                        let currentUser;
-
-                        users.forEach((user) => {
-                            if (user.id == comment.userId) {
-                                currentUser = user;
+                            title="Comentar"
+                            disabled={!login.email > 0 ? true : false}
+                            buttonStyle={styles.normalButton}
+                            onPress={() =>
+                                navigation.navigate("NewComment", { game })
                             }
-                        });
+                        />
+                        {allComments.map((comment, index) => {
+                            if (game.id == comment.gameId) {
+                                let currentUser;
 
-                        return (
-                            <Card key={index}>
-                                <Card.Title>{currentUser.name}</Card.Title>
-                                <Card.Divider />
-                                <Text>{comment.comment}</Text>
-                                <Card.Divider />
-                                <View>
-                                    <Button
-                                        title="Editar"
-                                        onPress={() =>
-                                            navigation.navigate("NewComment", {
-                                                game,
-                                                comment,
-                                            })
-                                        }
-                                    />
-                                    <Button
-                                        title="Apagar"
-                                        onPress={() =>
-                                            deleteComment(comment.id)
-                                        }
-                                    />
-                                </View>
-                            </Card>
-                        );
-                    }
-                })}
-            </View>
+                                users.forEach((user) => {
+                                    if (user.id == comment.userId) {
+                                        currentUser = user;
+                                    }
+                                });
+
+                                return (
+                                    <Card
+                                        key={index}
+                                        containerStyle={{
+                                            marginHorizontal: 0,
+                                            borderRadius: 10,
+                                        }}
+                                    >
+                                        <Card.Title>
+                                            {currentUser.name}
+                                        </Card.Title>
+                                        <Card.Divider />
+                                        <Text
+                                            style={{
+                                                marginBottom: 15,
+                                                marginHorizontal: 10,
+                                            }}
+                                        >
+                                            {comment.comment}
+                                        </Text>
+                                        <Card.Divider />
+                                        <View
+                                            style={{
+                                                flexDirection: "row",
+                                                justifyContent: "space-around",
+                                                width: "100%",
+                                            }}
+                                        >
+                                            <Button
+                                                title="Editar"
+                                                buttonStyle={
+                                                    styles.commentButtonEdit
+                                                }
+                                                containerStyle={{
+                                                    width: "40%",
+                                                }}
+                                                onPress={() =>
+                                                    navigation.navigate(
+                                                        "NewComment",
+                                                        {
+                                                            game,
+                                                            comment,
+                                                        }
+                                                    )
+                                                }
+                                            />
+                                            <Button
+                                                title="Apagar"
+                                                containerStyle={{
+                                                    width: "40%",
+                                                }}
+                                                buttonStyle={
+                                                    styles.commentButtonDelete
+                                                }
+                                                onPress={() =>
+                                                    deleteComment(comment.id)
+                                                }
+                                            />
+                                        </View>
+                                    </Card>
+                                );
+                            }
+                        })}
+                    </View>
+                </ScrollView>
+            </SafeAreaView>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     banner: {
-        backgroundColor: "green",
+        backgroundColor: "gray",
         height: 150,
         width: "100%",
-        alignItems: "center",
-        justifyContent: "center",
         marginBottom: 10,
     },
     nameBanner: {
         fontSize: 18,
         color: "white",
         fontWeight: "bold",
+        shadowOffset: {
+            width: 0,
+            height: 0,
+        },
+        shadowOpacity: 2,
+        shadowRadius: 5,
     },
     body: {
         paddingLeft: 20,
         paddingRight: 20,
+        marginBottom: 20,
+    },
+    infoGame: {
+        marginTop: 10,
+    },
+    normalButton: {
+        padding: 15,
+        marginBottom: 10,
+    },
+    adminBody: {
+        paddingHorizontal: 20,
+    },
+    redButton: {
+        padding: 15,
+        marginBottom: 10,
+        backgroundColor: "red",
+    },
+    subtitle: {
+        marginBottom: 10,
+    },
+    commentButtonEdit: {
+        padding: 5,
+        backgroundColor: "orange",
+    },
+    commentButtonDelete: {
+        padding: 5,
+        backgroundColor: "red",
+    },
+    yellowButton: {
+        padding: 15,
+        marginBottom: 10,
+        backgroundColor: "orange",
+    },
+    image: {
+        height: "100%",
+        width: "100%",
+        alignItems: "center",
+        justifyContent: "center",
     },
 });
