@@ -56,6 +56,14 @@ export default function GamePage({ route, navigation }) {
         }
     }
 
+    async function deleteComment(commentId) {
+        try {
+            await dispatch(CommentAction.remove(commentId));
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <View>
             <StatusBar style="auto" />
@@ -113,6 +121,24 @@ export default function GamePage({ route, navigation }) {
                                 <Card.Title>{currentUser.name}</Card.Title>
                                 <Card.Divider />
                                 <Text>{comment.comment}</Text>
+                                <Card.Divider />
+                                <View>
+                                    <Button
+                                        title="Editar"
+                                        onPress={() =>
+                                            navigation.navigate("NewComment", {
+                                                game,
+                                                comment,
+                                            })
+                                        }
+                                    />
+                                    <Button
+                                        title="Apagar"
+                                        onPress={() =>
+                                            deleteComment(comment.id)
+                                        }
+                                    />
+                                </View>
                             </Card>
                         );
                     }

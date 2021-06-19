@@ -4,16 +4,16 @@ import { StyleSheet, Text, View } from "react-native";
 import { Input, Button } from "react-native-elements";
 
 import * as UsersAction from "../services/actions/usersAction";
-import * as CommentAction from "../services/actions/commentAction";
+import * as TipAction from "../services/actions/tipAction";
 import { useSelector, useDispatch } from "react-redux";
 
-export default function NewComment({ route, navigation }) {
+export default function NewTip({ route, navigation }) {
     const dispatch = useDispatch();
     const { game } = route.params;
     const login = useSelector((store) => store.login);
     const users = useSelector((store) => store.users);
-    const [comment, setComment] = useState(
-        route.params.comment ? route.params.comment.comment : ""
+    const [tip, setTip] = useState(
+        route.params.tip ? route.params.tip.tip : ""
     );
     const [loading, setLoading] = useState(false);
 
@@ -21,9 +21,9 @@ export default function NewComment({ route, navigation }) {
         dispatch(UsersAction.getAll());
     }, [dispatch]);
 
-    async function sendComment() {
+    async function sendTip() {
         let currentUser;
-        let newComment;
+        let newTip;
 
         setLoading(true);
 
@@ -33,27 +33,26 @@ export default function NewComment({ route, navigation }) {
             }
         });
 
-        if (route.params.comment) {
-            newComment = {
+        if (route.params.tip) {
+            newTip = {
                 userId: currentUser.id,
                 gameId: game.id,
-                comment: comment,
-                id: route.params.comment.id,
+                tip,
+                id: route.params.tip.id,
             };
         } else {
-            newComment = {
+            newTip = {
                 userId: currentUser.id,
                 gameId: game.id,
-                comment: comment,
+                tip,
             };
         }
 
         try {
-            await dispatch(CommentAction.save(newComment));
+            await dispatch(TipAction.save(newTip));
 
             navigation.goBack();
         } catch (error) {
-            console.log(error);
             setLoading(false);
         }
     }
@@ -63,13 +62,13 @@ export default function NewComment({ route, navigation }) {
             <StatusBar style="auto" />
             <View>
                 <Input
-                    value={comment}
-                    onChangeText={(text) => setComment(text)}
-                    placeholder={`Comentario para ${game.name}`}
+                    value={tip}
+                    onChangeText={(text) => setTip(text)}
+                    placeholder={`Dica para ${game.name}`}
                 />
                 <Button
-                    title="Enviar Comentario"
-                    onPress={() => sendComment()}
+                    title="Enviar Dica"
+                    onPress={() => sendTip()}
                     loading={loading}
                 />
             </View>

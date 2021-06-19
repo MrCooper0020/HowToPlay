@@ -15,6 +15,7 @@ import GamePage from "./src/views/GamePage";
 import NewComment from "./src/views/NewComment";
 import TipsRoom from "./src/views/TipsRoom";
 import NewAccount from "./src/views/NewAccount";
+import NewTip from "./src/views/NewTip";
 
 export default function App() {
     const Stack = createStackNavigator();
@@ -86,6 +87,14 @@ export default function App() {
                         component={NewAccount}
                         options={{
                             title: "Criar conta",
+                            headerShown: true,
+                        }}
+                    />
+                    <Stack.Screen
+                        name="NewTip"
+                        component={NewTip}
+                        options={{
+                            title: "Nova Dica",
                             headerShown: true,
                         }}
                     />
