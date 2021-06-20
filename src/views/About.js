@@ -14,6 +14,11 @@ export default function About() {
                 }}
             >
                 <ScrollView>
+                    <View style={{ alignItems: "center" }}>
+                        <Text h3 style={styles.title}>
+                            Info sobre o desenvolvedor
+                        </Text>
+                    </View>
                     <Text h4 style={styles.infoBox}>
                         <Text style={{ fontWeight: "bold" }}>Nome: </Text>
                         Matheus H. Potrich
@@ -49,5 +54,10 @@ const styles = StyleSheet.create({
     },
     infoBox: {
         marginBottom: 20,
+    },
+    title: {
+        marginBottom: 30,
+        fontWeight: "bold",
+        alignItems: "center",
     },
 });
