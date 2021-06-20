@@ -16,46 +16,45 @@ export default function Faq() {
                 <ScrollView>
                     <View style={{ alignItems: "center" }}>
                         <Text h3 style={styles.title}>
-                            Funcionabilidades do app
+                            Funcionalidades do app
                         </Text>
                     </View>
                     <Text h4 style={styles.infoBox}>
                         <Text style={{ fontWeight: "bold" }}>Conta: </Text>É
-                        possivel criar uma conta no app e logar, o app tambem
-                        permite que email e senha ficam salvas para logar mais
-                        rapidamente.
+                        possível criar uma conta no app e logar(entrar), o app
+                        também permite que email e senha ficam salvas para
+                        logar(entrar) mais rapidamente.
                     </Text>
                     <Text h4 style={styles.infoBox}>
                         <Text style={{ fontWeight: "bold" }}>
                             Página de game:{" "}
                         </Text>
-                        O app permite que usuarios que tenham uma conta e
-                        estejam logado, criem uma página sobre um jogo que o
-                        usuario queira discutir com a comunidade, tambem sendo
-                        possivel editar e deletar somente pelo usuario criador.
+                        O app permite que usuários que tenham uma conta e
+                        estejam logado, criem uma página sobre um jogo que
+                        queira discutir com a comunidade, também sendo possível
+                        editar e deletar somente pelo usuário criador.
                     </Text>
                     <Text h4 style={styles.infoBox}>
                         <Text style={{ fontWeight: "bold" }}>
-                            Comentarios:{" "}
+                            Comentários:{" "}
                         </Text>
-                        Dentro de uma pagina de jogo, é possivel que usuarios
-                        logados criem comentarios, tambem é possivel que os
-                        usuarios editem e apaguem os comentarios que eles
-                        criaram.
+                        Em uma página de jogo, é possível que usuários logados
+                        criem comentários, também é possível que os usuários
+                        editem e apaguem os comentários que eles criaram.
                     </Text>
                     <Text h4 style={styles.infoBox}>
                         <Text style={{ fontWeight: "bold" }}>Dicas: </Text>
-                        Dentro de uma pagina de jogo, há um botão chamado "Sala
-                        de dicas" que está disponivel somente para usuarios
-                        logados, entrando nele, os usuario teram uma area
-                        somente para dicas sobre o jogo que podera ter spoiler
-                        sobre a historia do jogo em questao.
+                        Em uma página de jogo, há um botão chamado "Sala de
+                        dicas" que está disponível somente para usuários
+                        logados, entrando nele, os usuários terão uma área
+                        somente para dicas sobre o jogo que poderá ter spoiler
+                        sobre a história do jogo em questão.
                     </Text>
                     <Text h4 style={styles.infoBox}>
                         <Text style={{ fontWeight: "bold" }}>
-                            Minha localizacão:{" "}
+                            Minha localização:{" "}
                         </Text>
-                        O app permite que os usuarios utilizem um mapa para nao
+                        O app permite que os usuários utilizem um mapa para não
                         se perderem na vida real.
                     </Text>
                 </ScrollView>
