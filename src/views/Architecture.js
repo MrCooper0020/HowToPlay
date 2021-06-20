@@ -33,23 +33,23 @@ export default function Architecture() {
                     </Text>
                     <Text h4 style={styles.infoBox}>
                         <Text style={{ fontWeight: "bold" }}>
-                            Pasta service:{" "}
+                            Pasta services:{" "}
                         </Text>
-                        Onde fica todas as services do projeto, responsaveis por
+                        Onde fica todos os serviços do projeto, responsáveis por
                         comunicar o front-end com o back-end.
                     </Text>
                     <Text h4 style={styles.infoBox}>
                         <Text style={{ fontWeight: "bold" }}>
-                            Pasta actions dentro do service:{" "}
+                            Pasta actions dentro do services:{" "}
                         </Text>
-                        Onde fica os gatilhos responsaveis por se comunicar com
+                        Onde fica os gatilhos responsáveis por se comunicar com
                         o back-end e enviar os dados para os reducers.
                     </Text>
                     <Text h4 style={styles.infoBox}>
                         <Text style={{ fontWeight: "bold" }}>
-                            Pasta reducers dentro do service:{" "}
+                            Pasta reducers dentro do services:{" "}
                         </Text>
-                        Onde fica os reducers que são responsaveis por alterar
+                        Onde fica os reducers que são responsáveis por alterar
                         os dados na store do Redux.
                     </Text>
                     <Text h4 style={styles.infoBox}>
