@@ -1,11 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useLayoutEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { Input, Button } from "react-native-elements";
+import { StyleSheet, Text, View, TextInput } from "react-native";
+import { Button } from "react-native-elements";
 
 import * as UsersAction from "../services/actions/usersAction";
 import * as CommentAction from "../services/actions/commentAction";
 import { useSelector, useDispatch } from "react-redux";
+import mainStyle from "../Styles/main";
 
 export default function NewComment({ route, navigation }) {
     const dispatch = useDispatch();
@@ -53,7 +54,6 @@ export default function NewComment({ route, navigation }) {
 
             navigation.goBack();
         } catch (error) {
-            console.log(error);
             setLoading(false);
         }
     }
@@ -62,14 +62,16 @@ export default function NewComment({ route, navigation }) {
         <View style={styles.container}>
             <StatusBar style="auto" />
             <View>
-                <Input
+                <TextInput
                     value={comment}
                     onChangeText={(text) => setComment(text)}
                     placeholder={`Comentario para ${game.name}`}
+                    style={mainStyle.normalInput}
                 />
                 <Button
                     title="Enviar Comentario"
                     onPress={() => sendComment()}
+                    buttonStyle={mainStyle.greenButton}
                     loading={loading}
                 />
             </View>
