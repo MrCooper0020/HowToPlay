@@ -66,24 +66,29 @@ export default function Home({ route, navigation }) {
                     <View>
                         <CardItem
                             title="Minha Localizacão"
+                            image={require("../Images/mapsImage.jpg")}
+                            showBackground={true}
                             onPress={() => {
                                 navigation.navigate("Maps");
                             }}
                         />
                         <CardItem
                             title="Expo ou CLI?"
+                            image={require("../Images/infoImage.jpg")}
                             onPress={() => {
                                 navigation.navigate("HowWasMade");
                             }}
                         />
                         <CardItem
                             title="Arquitetura"
+                            image={require("../Images/infoImage.jpg")}
                             onPress={() => {
                                 navigation.navigate("Architecture");
                             }}
                         />
                         <CardItem
                             title="FAQ"
+                            image={require("../Images/infoImage.jpg")}
                             onPress={() => {
                                 navigation.navigate("Faq");
                             }}
@@ -106,6 +111,7 @@ export default function Home({ route, navigation }) {
                                     <CardItem
                                         key={i}
                                         title={item.name}
+                                        image={require("../Images/gameBanner.png")}
                                         onPress={() =>
                                             navigation.navigate("GamePage", {
                                                 game: item,
