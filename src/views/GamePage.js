@@ -118,7 +118,6 @@ export default function GamePage({ route, navigation }) {
                             <>
                                 <Button
                                     title="Editar jogo"
-                                    loading={loadingDelete}
                                     buttonStyle={mainStyle.yellowButton}
                                     onPress={() =>
                                         navigation.navigate("RegisterGame", {
