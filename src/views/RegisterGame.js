@@ -79,7 +79,7 @@ export default function RegisterGame({ route, navigation }) {
                     value={name}
                     onChangeText={(text) => setName(text)}
                 />
-                <Text>Data de lancamento:</Text>
+                <Text>Data de lançamento:</Text>
                 <TextInput
                     style={mainStyle.normalInput}
                     placeholder="dd/mm/yyyy"
@@ -88,7 +88,7 @@ export default function RegisterGame({ route, navigation }) {
                     value={releaseDate}
                     onChangeText={(text) => setReleaseDate(text)}
                 />
-                <Text>Descricao (opcional):</Text>
+                <Text>Descrição:</Text>
                 <TextInput
                     style={mainStyle.normalInput}
                     placeholder="Descricao"
@@ -110,7 +110,8 @@ export default function RegisterGame({ route, navigation }) {
                     disabled={
                         name.length > 0 &&
                         releaseDate.length > 0 &&
-                        developer.length > 0
+                        developer.length > 0 &&
+                        description.length > 0
                             ? false
                             : true
                     }

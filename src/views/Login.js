@@ -63,7 +63,7 @@ export default function Login({ route, navigation }) {
                 />
                 <View>
                     <CheckBox
-                        title="lembrar-me"
+                        title="Lembre-me"
                         center
                         checked={remember}
                         onPress={() => setRemember(!remember)}

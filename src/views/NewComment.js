@@ -65,11 +65,11 @@ export default function NewComment({ route, navigation }) {
                 <TextInput
                     value={comment}
                     onChangeText={(text) => setComment(text)}
-                    placeholder={`Comentario para ${game.name}`}
+                    placeholder={`Comentário para ${game.name}`}
                     style={mainStyle.normalInput}
                 />
                 <Button
-                    title="Enviar Comentario"
+                    title="Enviar Comentário"
                     onPress={() => sendComment()}
                     buttonStyle={mainStyle.greenButton}
                     loading={loading}

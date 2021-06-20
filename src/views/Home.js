@@ -67,7 +67,7 @@ export default function Home({ route, navigation }) {
                 <ScrollView style={{ paddingLeft: 20, paddingRight: 20 }}>
                     <View>
                         <CardItem
-                            title="Minha Localizacão"
+                            title="Minha Localização"
                             image={require("../Images/mapsImage.jpg")}
                             showBackground={true}
                             onPress={() => {

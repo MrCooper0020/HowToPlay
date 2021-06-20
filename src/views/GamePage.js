@@ -101,7 +101,7 @@ export default function GamePage({ route, navigation }) {
                     </View>
                     <View style={styles.body}>
                         <Text style={styles.infoGame}>
-                            <Text h4>Descricao do jogo: </Text>
+                            <Text h4>Descrição do jogo: </Text>
                             <Text h5>{game.description}</Text>
                         </Text>
                         <Text style={styles.infoGame}>
@@ -109,7 +109,7 @@ export default function GamePage({ route, navigation }) {
                             <Text h5>{game.developer}</Text>
                         </Text>
                         <Text style={styles.infoGame}>
-                            <Text h4>Data de lancamento: </Text>
+                            <Text h4>Data de lançamento: </Text>
                             <Text h5>{game.releaseDate}</Text>
                         </Text>
                     </View>
@@ -146,7 +146,7 @@ export default function GamePage({ route, navigation }) {
                     <View style={styles.adminBody}>
                         <Card.Divider />
                         <Text h4 style={styles.subtitle}>
-                            Comentarios sobre o jogo:
+                            Comentários sobre o jogo:
                         </Text>
                         <Button
                             title="Comentar"
