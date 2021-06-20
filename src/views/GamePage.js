@@ -24,7 +24,7 @@ export default function GamePage({ route, navigation }) {
     const users = useSelector((store) => store.users);
     const tips = useSelector((store) => store.tips);
     const { game } = route.params;
-    const [isCreator, setIsCreator] = useState(false);
+    const [currentUser, setCurrentUser] = useState(false);
     const [loadingDelete, setLoadingDelete] = useState(false);
 
     useLayoutEffect(() => {
@@ -33,17 +33,18 @@ export default function GamePage({ route, navigation }) {
                 await dispatch(CommentsAction.getAll());
                 await dispatch(UsersAction.getAll());
                 await dispatch(TipsAction.getAll());
+
+                // save the id of current user
+                if (login.email) {
+                    users.forEach((user) => {
+                        if (login.email == user.email) {
+                            setCurrentUser(user);
+                        }
+                    });
+                }
             } catch (error) {}
         }
         loadData();
-
-        if (login.email) {
-            users.forEach((user) => {
-                if (login.email == user.email) {
-                    setIsCreator(true);
-                }
-            });
-        }
     }, [dispatch]);
 
     async function deleteGame() {
@@ -113,7 +114,7 @@ export default function GamePage({ route, navigation }) {
                         </Text>
                     </View>
                     <View style={styles.adminBody}>
-                        {isCreator ? (
+                        {game.creatorId == currentUser.id ? (
                             <>
                                 <Button
                                     title="Editar jogo"
@@ -157,11 +158,11 @@ export default function GamePage({ route, navigation }) {
                         />
                         {allComments.map((comment, index) => {
                             if (game.id == comment.gameId) {
-                                let currentUser;
+                                let commentCreator;
 
                                 users.forEach((user) => {
                                     if (user.id == comment.userId) {
-                                        currentUser = user;
+                                        commentCreator = user;
                                     }
                                 });
 
@@ -174,7 +175,7 @@ export default function GamePage({ route, navigation }) {
                                         }}
                                     >
                                         <Card.Title>
-                                            {currentUser.name}
+                                            {commentCreator.name}
                                         </Card.Title>
                                         <Card.Divider />
                                         <Text
@@ -185,45 +186,52 @@ export default function GamePage({ route, navigation }) {
                                         >
                                             {comment.comment}
                                         </Text>
-                                        <Card.Divider />
-                                        <View
-                                            style={{
-                                                flexDirection: "row",
-                                                justifyContent: "space-around",
-                                                width: "100%",
-                                            }}
-                                        >
-                                            <Button
-                                                title="Editar"
-                                                buttonStyle={
-                                                    styles.commentButtonEdit
-                                                }
-                                                containerStyle={{
-                                                    width: "40%",
-                                                }}
-                                                onPress={() =>
-                                                    navigation.navigate(
-                                                        "NewComment",
-                                                        {
-                                                            game,
-                                                            comment,
+                                        {commentCreator.id == currentUser.id ? (
+                                            <>
+                                                <Card.Divider />
+                                                <View
+                                                    style={{
+                                                        flexDirection: "row",
+                                                        justifyContent:
+                                                            "space-around",
+                                                        width: "100%",
+                                                    }}
+                                                >
+                                                    <Button
+                                                        title="Editar"
+                                                        buttonStyle={
+                                                            styles.commentButtonEdit
                                                         }
-                                                    )
-                                                }
-                                            />
-                                            <Button
-                                                title="Apagar"
-                                                containerStyle={{
-                                                    width: "40%",
-                                                }}
-                                                buttonStyle={
-                                                    styles.commentButtonDelete
-                                                }
-                                                onPress={() =>
-                                                    deleteComment(comment.id)
-                                                }
-                                            />
-                                        </View>
+                                                        containerStyle={{
+                                                            width: "40%",
+                                                        }}
+                                                        onPress={() =>
+                                                            navigation.navigate(
+                                                                "NewComment",
+                                                                {
+                                                                    game,
+                                                                    comment,
+                                                                }
+                                                            )
+                                                        }
+                                                    />
+                                                    <Button
+                                                        title="Apagar"
+                                                        containerStyle={{
+                                                            width: "40%",
+                                                        }}
+                                                        buttonStyle={
+                                                            styles.commentButtonDelete
+                                                        }
+                                                        onPress={() =>
+                                                            deleteComment(
+                                                                comment.id
+                                                            )
+                                                        }
+                                                    />
+                                                </View>
+                                            </>
+                                        ) : null}
                                     </Card>
                                 );
                             }
