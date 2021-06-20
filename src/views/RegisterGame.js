@@ -1,11 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useLayoutEffect } from "react";
 import { StyleSheet, Text, View, TextInput } from "react-native";
-import { Button } from "react-native-elements/dist/buttons/Button";
+import { Button } from "react-native-elements";
 
 import * as GameAction from "../services/actions/gameAction";
 import * as UsersAction from "../services/actions/usersAction";
 import { useSelector, useDispatch } from "react-redux";
+import mainStyle from "../Styles/main";
 
 export default function RegisterGame({ route, navigation }) {
     const dispatch = useDispatch();
@@ -73,73 +74,46 @@ export default function RegisterGame({ route, navigation }) {
             <View style={{ marginLeft: 20, marginRight: 20 }}>
                 <Text>Nome:</Text>
                 <TextInput
-                    style={{
-                        width: "100%",
-                        padding: 10,
-                        borderColor: "gray",
-                        borderWidth: 1,
-                        borderRadius: 10,
-                        marginTop: 10,
-                        marginBottom: 10,
-                    }}
-                    placeholder="nome"
+                    style={mainStyle.normalInput}
+                    placeholder="Nome"
                     value={name}
                     onChangeText={(text) => setName(text)}
                 />
                 <Text>Data de lancamento:</Text>
                 <TextInput
-                    style={{
-                        width: "100%",
-                        padding: 10,
-                        borderColor: "gray",
-                        borderWidth: 1,
-                        borderRadius: 10,
-                        marginTop: 10,
-                        marginBottom: 10,
-                    }}
-                    placeholder="Data de lancamento"
+                    style={mainStyle.normalInput}
+                    placeholder="dd/mm/yyyy"
                     keyboardType="numeric"
+                    maxLength={8}
                     value={releaseDate}
                     onChangeText={(text) => setReleaseDate(text)}
                 />
-                <Text>Descricao (opicional):</Text>
+                <Text>Descricao (opcional):</Text>
                 <TextInput
-                    style={{
-                        width: "100%",
-                        padding: 10,
-                        borderColor: "gray",
-                        borderWidth: 1,
-                        borderRadius: 10,
-                        marginTop: 10,
-                        marginBottom: 10,
-                    }}
+                    style={mainStyle.normalInput}
                     placeholder="Descricao"
                     value={description}
                     onChangeText={(text) => setDescription(text)}
                 />
                 <Text>Desenvolvedor:</Text>
                 <TextInput
-                    style={{
-                        width: "100%",
-                        padding: 10,
-                        borderColor: "gray",
-                        borderWidth: 1,
-                        borderRadius: 10,
-                        marginTop: 10,
-                        marginBottom: 10,
-                    }}
+                    style={mainStyle.normalInput}
                     placeholder="Desenvolvedor"
                     value={developer}
+                    under
                     onChangeText={(text) => setDeveloper(text)}
                 />
                 <Button
                     title="Adicionar"
-                    buttonStyle={{
-                        backgroundColor: "green",
-                        borderRadius: 10,
-                        padding: 15,
-                    }}
+                    buttonStyle={mainStyle.greenButton}
                     loading={loading}
+                    disabled={
+                        name.length > 0 &&
+                        releaseDate.length > 0 &&
+                        developer.length > 0
+                            ? false
+                            : true
+                    }
                     onPress={() => uploadData()}
                 />
             </View>
@@ -147,4 +121,8 @@ export default function RegisterGame({ route, navigation }) {
     );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    container: {
+        marginTop: 20,
+    },
+});

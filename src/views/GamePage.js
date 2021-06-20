@@ -15,6 +15,7 @@ import * as CommentAction from "../services/actions/commentAction";
 import * as TipsAction from "../services/actions/tipsAction";
 import * as TipAction from "../services/actions/tipAction";
 import { useSelector, useDispatch } from "react-redux";
+import mainStyle from "../Styles/main";
 
 export default function GamePage({ route, navigation }) {
     const dispatch = useDispatch();
@@ -117,7 +118,7 @@ export default function GamePage({ route, navigation }) {
                                 <Button
                                     title="Editar jogo"
                                     loading={loadingDelete}
-                                    buttonStyle={styles.yellowButton}
+                                    buttonStyle={mainStyle.yellowButton}
                                     onPress={() =>
                                         navigation.navigate("RegisterGame", {
                                             game,
@@ -126,7 +127,7 @@ export default function GamePage({ route, navigation }) {
                                 />
                                 <Button
                                     title="Deletar jogo"
-                                    buttonStyle={styles.redButton}
+                                    buttonStyle={mainStyle.redButton}
                                     loading={loadingDelete}
                                     onPress={() => deleteGame()}
                                 />
@@ -134,7 +135,7 @@ export default function GamePage({ route, navigation }) {
                         ) : null}
                         <Button
                             title="Sala de dicas"
-                            buttonStyle={styles.normalButton}
+                            buttonStyle={mainStyle.normalButton}
                             disabled={!login.email ? true : false}
                             onPress={() =>
                                 navigation.navigate("TipsRoom", { game })
@@ -149,7 +150,7 @@ export default function GamePage({ route, navigation }) {
                         <Button
                             title="Comentar"
                             disabled={!login.email > 0 ? true : false}
-                            buttonStyle={styles.normalButton}
+                            buttonStyle={mainStyle.normalButton}
                             onPress={() =>
                                 navigation.navigate("NewComment", { game })
                             }
@@ -260,17 +261,8 @@ const styles = StyleSheet.create({
     infoGame: {
         marginTop: 10,
     },
-    normalButton: {
-        padding: 15,
-        marginBottom: 10,
-    },
     adminBody: {
         paddingHorizontal: 20,
-    },
-    redButton: {
-        padding: 15,
-        marginBottom: 10,
-        backgroundColor: "red",
     },
     subtitle: {
         marginBottom: 10,
@@ -282,11 +274,6 @@ const styles = StyleSheet.create({
     commentButtonDelete: {
         padding: 5,
         backgroundColor: "red",
-    },
-    yellowButton: {
-        padding: 15,
-        marginBottom: 10,
-        backgroundColor: "orange",
     },
     image: {
         height: "100%",
