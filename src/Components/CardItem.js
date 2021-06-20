@@ -27,7 +27,7 @@ export default function CardItem(props) {
 const styles = StyleSheet.create({
     cardBody: {
         borderRadius: 40,
-        height: 180,
+        height: 100,
         marginTop: 10,
         marginBottom: 10,
         alignItems: "center",
