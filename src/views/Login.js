@@ -1,10 +1,11 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useLayoutEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View, TextInput } from "react-native";
 import * as LoginAction from "../services/actions/loginAction";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useSelector, useDispatch } from "react-redux";
-import { Input, Button, CheckBox } from "react-native-elements";
+import { Button, CheckBox, Text } from "react-native-elements";
+import mainStyle from "../Styles/main";
 
 export default function Login({ route, navigation }) {
     const dispatch = useDispatch();
@@ -41,14 +42,21 @@ export default function Login({ route, navigation }) {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
+            <View style={styles.containerTitle}>
+                <Text h1 style={styles.title}>
+                    How to Play
+                </Text>
+            </View>
             <View style={styles.loginBody}>
-                <Input
+                <TextInput
                     placeholder="Email"
+                    style={mainStyle.normalInput}
                     value={email}
                     onChangeText={(text) => setEmail(text)}
                 />
-                <Input
+                <TextInput
                     placeholder="Senha"
+                    style={mainStyle.normalInput}
                     value={password}
                     onChangeText={(text) => setPassword(text)}
                     secureTextEntry={true}
@@ -59,6 +67,7 @@ export default function Login({ route, navigation }) {
                         center
                         checked={remember}
                         onPress={() => setRemember(!remember)}
+                        checkedColor={"green"}
                         containerStyle={{
                             backgroundColor: "transparent",
                             borderWidth: 0,
@@ -67,12 +76,17 @@ export default function Login({ route, navigation }) {
                 </View>
                 <Button
                     title="Entrar"
+                    buttonStyle={mainStyle.greenButton}
                     loading={loading}
                     onPress={() => login()}
+                    disabled={
+                        email.length > 0 && password.length > 0 ? false : true
+                    }
                 />
                 <Button
                     title="Criar conta"
                     type="clear"
+                    titleStyle={{ color: "green" }}
                     onPress={() => navigation.navigate("NewAccount")}
                 />
             </View>
@@ -88,10 +102,26 @@ const styles = StyleSheet.create({
     },
     loginBody: {
         width: "70%",
+        marginBottom: 100,
     },
     containerSwitch: {
         alignItems: "center",
         justifyContent: "center",
         width: "100%",
+    },
+    title: {
+        fontWeight: "bold",
+        shadowOffset: {
+            width: 0,
+            height: 0,
+        },
+        shadowOpacity: 1,
+        shadowRadius: 5,
+        shadowColor: "grey",
+    },
+    containerTitle: {
+        alignItems: "center",
+        marginBottom: 20,
+        height: 100,
     },
 });
