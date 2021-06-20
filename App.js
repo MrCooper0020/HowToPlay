@@ -39,7 +39,7 @@ export default function App() {
                                     onPress={() => navigation.navigate("About")}
                                     title="Sobre"
                                     type="clear"
-                                    buttonStyle={{ fontColor: "blue" }}
+                                    titleStyle={{ color: "#2196F3" }}
                                 />
                             ),
                         })}

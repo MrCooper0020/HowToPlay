@@ -32,6 +32,7 @@ export default function Home({ route, navigation }) {
                         <Button
                             title="Sair"
                             type="clear"
+                            titleStyle={{ color: "red" }}
                             onPress={() => logout()}
                         />
                     );
@@ -41,6 +42,7 @@ export default function Home({ route, navigation }) {
                             onPress={() => navigation.navigate("Login")}
                             title="Entrar"
                             type="clear"
+                            titleStyle={{ color: "#2196F3" }}
                         />
                     );
                 }
@@ -96,6 +98,7 @@ export default function Home({ route, navigation }) {
                         {login.email ? (
                             <CardItem
                                 title="Adicionar jogo"
+                                image={require("../Images/registerImage.jpg")}
                                 onPress={() => {
                                     navigation.navigate("RegisterGame");
                                 }}
