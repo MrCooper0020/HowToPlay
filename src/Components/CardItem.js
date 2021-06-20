@@ -2,8 +2,6 @@ import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 
 export default function CardItem(props) {
-    console.log(props.image);
-
     return (
         <TouchableOpacity onPress={props.onPress}>
             <View style={styles.cardBody}>
