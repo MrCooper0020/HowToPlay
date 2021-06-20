@@ -73,6 +73,7 @@ export default function NewComment({ route, navigation }) {
                     onPress={() => sendComment()}
                     buttonStyle={mainStyle.greenButton}
                     loading={loading}
+                    disabled={comment.length > 0 ? false : true}
                 />
             </View>
         </View>
